@@ -1,14 +1,13 @@
-var THREE = require('three');
+var THREE = require('three'),
+    World = require('three-world');
 
-var renderer = new THREE.WebGLRenderer(),
-    scene    = new THREE.Scene(),
-    camera   = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 100);
+World.init({ambientLightColor: 0, camDistance: 100, renderCallback: render});
 
 var box = new THREE.Mesh(
   new THREE.BoxGeometry(10, 10, 10),
-  new THREE.MeshPhongMaterial()
+  new THREE.MeshPhongMaterial({metal: true, shininess: 1000})
 );
-scene.add(box);
+World.add(box);
 
 var lightR = new THREE.PointLight(0xff0000, 1, 100);
 lightR.position.set(-10, 20, 10);
@@ -17,23 +16,15 @@ lightG.position.set( 10, 20, 10);
 var lightB = new THREE.PointLight(0x0000ff, 1, 100);
 lightB.position.set(  0, -20, 10);
 
-scene.add(lightR);
-scene.add(lightG);
-scene.add(lightB);
-
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-camera.position.set(0,0, 50);
+World.add(lightR);
+World.add(lightG);
+World.add(lightB);
 
 function render() {
-
-  box.rotation.y += -Math.PI / 100;
-  box.rotation.x +=  Math.PI / 100;
-  box.rotation.z += -Math.PI / 100;
-
-  renderer.render(scene, camera);
-
-  requestAnimationFrame(render);
+  box.rotation.y += -Math.PI / 1000;
+  box.rotation.x +=  Math.PI / 1000;
+//  box.rotation.z += -Math.PI / 100;
 }
 
-render();
+World.start();
+console.log("Ready");
