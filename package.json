@@ -1,5 +1,5 @@
 {
-  "name": "whatever",
+  "name": "three-workshop",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,7 +12,7 @@
   "dependencies": {
     "q": "^1.1.2",
     "three": "^0.69.0",
-    "three-world": "^1.2.0",
+    "three-world": "^2.0.0",
     "tween.js": "^0.14.0"
   },
   "devDependencies": {
